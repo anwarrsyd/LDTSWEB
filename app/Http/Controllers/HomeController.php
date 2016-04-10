@@ -43,7 +43,7 @@ class HomeController extends controller{
 
             
 		));
-
+		  Session::flash('messagesuksesdelete','iyes');
 		  return redirect('input');
 	}
 
@@ -59,6 +59,18 @@ class HomeController extends controller{
 
     $json = json_decode(file_get_contents($url), true);
     return $json;
-    
+
 	}
+
+	 public function delete()
+    {
+        $data=Input::all();
+        $id=$data['id'];
+        Layanan::where('id', $id)->delete();
+         Session::flash('messagesuksesdelete','iyes');
+        return redirect('list');
+        
+
+    }
+
 }

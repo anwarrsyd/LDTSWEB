@@ -95,10 +95,20 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK2E3Dd2UxSPHSogXf3tzdIoy3BftPK-o&signed_in=true&callback=initAutocomplete"
     type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{{URL::to ('swal/dist/sweetalert.css')}}">
+ <script src="{{URL::to ('swal/dist/sweetalert.min.js')}}"></script>
 
+<script type="text/javascript">
+    function notifkeren(){
+    swal("Sukses", "Data Berhasil Ditambahkan", "success")
+}
+
+</script>
 </head>
 <body>
-
+@if (Session::has('messagesuksesdelete'))
+              <script type="text/javascript">notifkeren();</script>
+        @endif
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
 
@@ -185,22 +195,26 @@
                                                 <label>Nama Layanan</label>
                                                 <input type="text" class="form-control" placeholder="input nama" name="layanan">
                                             </div>
+
                                         <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Alamat</label>
-                                                <input type="text" class="form-control" placeholder="Alamat" value="" name="alamat">
-                                            </div>
-                                        
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nomor telepon</label>
                                                 <input type="text" class="form-control" placeholder="telepon" value="" name="telpon">
                                         </div>
                                     </div>
+                                    </div>
                                         
-                                        
-                                    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                                         <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Alamat</label>
+                                        <input id="pac-input" class="controls" type="text" placeholder="Masukan alamat!" name="alamat"> 
+                                        </div>
+                                        </div>
+                                        </div>
+                                                             
+                                   
                                     <div id="map"></div>
 
                                     <div class="row">
@@ -320,19 +334,19 @@ var map = new google.maps.Map(document.getElementById('map'), {
       panggil fungsi updateMarkerPosition(latLng)
      dan letakan posisi terakhir di id=latitude dan id=longitude
      */
-    var marker = new google.maps.Marker({
-        position : latLng,
-        title : 'lokasi',
-        map : map,
-        draggable : true
-      });
+    // var marker = new google.maps.Marker({
+    //     position : latLng,
+    //     title : 'lokasi',
+    //     map : map,
+    //     draggable : true
+    //   });
        
-    updateMarkerPosition(latLng);
-    google.maps.event.addListener(marker, 'drag', function() {
-     // ketika marker di drag, otomatis nilai latitude dan longitude
-     //menyesuaikan dengan posisi marker 
-        updateMarkerPosition(marker.getPosition());
-      });
+    // updateMarkerPosition(latLng);
+    // google.maps.event.addListener(marker, 'drag', function() {
+    //  // ketika marker di drag, otomatis nilai latitude dan longitude
+    //  //menyesuaikan dengan posisi marker 
+    //     updateMarkerPosition(marker.getPosition());
+    //   });
 
 
   var markers = [];

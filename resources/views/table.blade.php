@@ -22,16 +22,24 @@
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet" />
-
+ <link rel="stylesheet" type="text/css" href="{{URL::to ('swal/dist/sweetalert.css')}}">
+ <script src="{{URL::to ('swal/dist/sweetalert.min.js')}}"></script>
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+<script type="text/javascript">
+    function notifkeren(){
+    swal("Sukses", "Data berhasil dihapus", "success")
+}
 
+</script>
 </head>
 <body>
-
+ @if (Session::has('messagesuksesdelete'))
+              <script type="text/javascript">notifkeren();</script>
+        @endif
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
 
@@ -130,7 +138,7 @@
                                         	<td>{{$info->notelpon}}</td>
                                         	<td>{{$info->lat}}</td>
                                             <td>{{$info->longitude}}</td>
-                                             <td><button type="submit" class="btn btn-info btn-fill pull-right">Hapus</button><td>
+                                              <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$info->id}}" data-id="{{$info->id}}">delete</button><td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -163,7 +171,35 @@
     </div>
 </div>
 
+    @foreach($daftar as $post ) 
+<div id="deleteModal{{$post->id}}" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Peserta</h3>
+                  </div>
+                  <div id="modal_soal" style="overflow:hidden;padding:2%;" class="modal-body">
+                  <h5>Apakah ingin menghapus peserta ini?</h5>
+            
+      </div>
+      <div class="modal-footer">
+          <form method="POST" action="{{URL:: to ('hapuspeserta')}}" style="float: left; margin-right: 6%">
+               <input type="hidden" id="id"name="id" value="{{$post->id}}">
+               <input type="hidden" name="_token" value="{{ csrf_token() }}">
+               <button type="submit" class="btn btn-danger">Hapus</button>                                      
+            </form>
+            </form>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+      </div>
+    </div>
 
+  </div>
+</div>
+              </div>
+            </div>          
+    @endforeach
 </body>
 
     <!--   Core JS Files   -->

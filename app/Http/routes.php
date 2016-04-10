@@ -17,3 +17,4 @@ Route::get('list','HomeController@daftar');
 Route::get('dataldts','HomeController@passdata');
 Route::post('insert','HomeController@insert');
 Route::get('json','HomeController@getdata');
+Route::post('hapuspeserta','HomeController@delete');
