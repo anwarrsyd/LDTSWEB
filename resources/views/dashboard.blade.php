@@ -334,19 +334,19 @@ var map = new google.maps.Map(document.getElementById('map'), {
       panggil fungsi updateMarkerPosition(latLng)
      dan letakan posisi terakhir di id=latitude dan id=longitude
      */
-    // var marker = new google.maps.Marker({
-    //     position : latLng,
-    //     title : 'lokasi',
-    //     map : map,
-    //     draggable : true
-    //   });
+    var marker = new google.maps.Marker({
+        position : latLng,
+        title : 'lokasi',
+        map : map,
+         draggable : true
+       });
        
-    // updateMarkerPosition(latLng);
-    // google.maps.event.addListener(marker, 'drag', function() {
-    //  // ketika marker di drag, otomatis nilai latitude dan longitude
-    //  //menyesuaikan dengan posisi marker 
-    //     updateMarkerPosition(marker.getPosition());
-    //   });
+     updateMarkerPosition(latLng);
+     google.maps.event.addListener(marker, 'drag', function() {
+    // ketika marker di drag, otomatis nilai latitude dan longitude
+     //menyesuaikan dengan posisi marker 
+        updateMarkerPosition(marker.getPosition());
+     });
 
 
   var markers = [];
@@ -359,6 +359,9 @@ var map = new google.maps.Map(document.getElementById('map'), {
     if (places.length == 0) {
       return;
     }
+
+
+
 
     // Clear out the old markers.
     markers.forEach(function(marker) {

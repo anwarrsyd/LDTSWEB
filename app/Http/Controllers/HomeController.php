@@ -73,4 +73,12 @@ class HomeController extends controller{
 
     }
 
+    public function distance($kategori,$lat,$long){
+    	$results=array();
+    	$results = DB::select( DB::raw("SELECT *, ( 3959 * acos( cos( radians(".$lat.") ) 
+    		* cos( radians( lat ) ) * cos( radians( longitude) - radians(".$long.") ) 
+    		+ sin( radians(".$lat.") ) * sin( radians( lat ) ) ) ) AS distance FROM layanan  where kategori ='$kategori' HAVING distance < 25 ORDER BY distance LIMIT 0 , 20 ") );
+    	return json_encode($results);
+    }
+
 }
