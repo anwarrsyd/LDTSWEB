@@ -46,6 +46,39 @@ class HomeController extends controller{
 		  Session::flash('messagesuksesdelete','iyes');
 		  return redirect('input');
 	}
+	public function insertandroid(){
+		  $data=Input::all();
+          layanan::insertGetId(array(
+            'kategori'=> $data['kategori'],
+            'namalayanan'=>$data['namalayanan'],
+            'alamat'=>$data['alamat'],
+            'notelpon'=>$data['notelpon'],
+            'lat'=>$data['lat'],
+            'longitude'=>$data['longitude']
+
+            
+		));
+		return "upload sukses";
+		}
+
+    public function insertandroidjson($kategori,$namalayanan,$alamat,$notelpon,$lat,$longitude){
+         $data=Input::all();
+          layanan::insertGetId(array(
+            'kategori'=> $kategori,
+            'namalayanan'=>$namalayanan,
+            'alamat'=>$alamat,
+            'notelpon'=>$notelpon,
+            'lat'=>$lat,
+            'longitude'=>$longitude
+
+            
+        ));
+          $value=array();
+            $value[0]=["status"=>"ok"];
+            return json_encode($value);
+        }
+
+
 
 
 	public function passdata(){
@@ -77,8 +110,20 @@ class HomeController extends controller{
     	$results=array();
     	$results = DB::select( DB::raw("SELECT *, ( 3959 * acos( cos( radians(".$lat.") ) 
     		* cos( radians( lat ) ) * cos( radians( longitude) - radians(".$long.") ) 
-    		+ sin( radians(".$lat.") ) * sin( radians( lat ) ) ) ) AS distance FROM layanan  where kategori ='$kategori' HAVING distance < 25 ORDER BY distance LIMIT 0 , 20 ") );
+    		+ sin( radians(".$lat.") ) * sin( radians( lat ) ) ) ) AS distance FROM layanan  where kategori ='$kategori' HAVING distance < 3 ORDER BY distance LIMIT 0 , 20 ") );
     	return json_encode($results);
     }
 
+    public function notelpon($namalayanan){
+    	$results=array();
+    	$results=Layanan::select('notelpon')->where('namalayanan','=',$namalayanan)->get();
+    	return json_encode($results);
+
+    }
+    public function notelpondedek($lat,$lng){
+    	$results=array();
+    	$results=Layanan::select('notelpon')->where('lat','=',$lat)->where('longitude','=',$lng)->get();
+    	return json_encode($results);
+
+    }
 }

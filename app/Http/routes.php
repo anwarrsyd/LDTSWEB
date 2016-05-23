@@ -19,3 +19,7 @@ Route::post('insert','HomeController@insert');
 Route::get('json','HomeController@getdata');
 Route::post('hapuspeserta','HomeController@delete');
 Route::get('jarak/{kategori}/{lat}/{long}','HomeController@distance');
+Route::post('uploaddata','HomeController@insertandroid');
+Route::get('notelpon/{namalayanan}','HomeController@notelpon');
+Route::get('notelpondedek/{lat}/{lng}','HomeController@notelpondedek');
+Route::post('uploaddatajson/{kategori}/{namalayanan}/{alamat}/{notelpon}/{lat}/{longitude}','HomeController@insertandroidjson');

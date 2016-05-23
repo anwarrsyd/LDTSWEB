@@ -187,7 +187,13 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Kategori layanan</label>
-                                                <input type="text" class="form-control" placeholder="input nama" name="kategori">
+                                                <div>
+                                                <select name="kategori">
+                                                <option value="Keamanan">Keamanan</option>
+                                                <option value="Kesehatan">Kesehatan</option>
+                                                <option value="Transportasi">Transportasi</option>
+                                              </select>
+                                              </div>
                                             </div>
                                     <div class="row">
                                         <div class="col-md-12">
